@@ -49,12 +49,55 @@ ORDER BY TotalRevenue DESC;
   product line.
 
 ### 2. Who are the top 10 customers by total spend?
-- Query: `queries/top_customers.sql`
-- Finding: 
+- Query: [queries/top_customers_by_spend.sql](queries/top_customers_by_spend.sql)
+
+```sql
+SELECT 
+    c.CustomerID,
+    c.CompanyName,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS TotalSpent
+FROM "Order Details" od
+JOIN Orders o ON od.OrderID = o.OrderID
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CustomerID, c.CompanyName
+ORDER BY TotalSpent DESC
+LIMIT 10;
+```
+
+<p align="center">
+  <img width="487" height="289" alt="image" src="https://github.com/user-attachments/assets/68e80dce-9560-48c7-9402-2e9fa9f85712" />
+</p>
+
+- Finding: B's Beverages is the top customer by total spend at roughly $6.15M, 
+  followed by Hungry Coyote Import Store ($5.7M) and Rancho grande ($5.56M). 
+  Spend among the top 10 customers is fairly close together, with no single 
+  customer dominating. Note: an earlier version of this query grouped by 
+  CompanyName only, which merged two distinct customers who both display as 
+  "IT" into one inflated total, grouping by CustomerID instead resolved this 
+  and gives an accurate per-customer ranking.
 
 ### 3. Which employees have the highest sales performance?
 - Query: `queries/employee_sales_performance.sql`
-- Finding: 
+
+```sql
+SELECT 
+    e.EmployeeID,
+    e.FirstName,
+    e.LastName,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS SalesAmount
+FROM "Order Details" od
+JOIN Orders o ON od.OrderID = o.OrderID
+JOIN Employees e ON o.EmployeeID = e.EmployeeID
+GROUP BY e.EmployeeID, e.FirstName, e.LastName
+ORDER BY SalesAmount DESC
+LIMIT 10;
+```
+
+<p align="center">
+  <img width="401" height="275" alt="image" src="https://github.com/user-attachments/assets/f2f878f1-2108-4cfb-b575-a1c5601659e6" />
+</p>
+
+- Finding: Margaret Peacock is the top-performing employee by sales at roughly $51.5M, followed closely by Steven Buchanan ($51.4M) and Janet Leverling ($50.4M). Unlike the customer and category rankings, employee sales performance is remarkably consistent across the team, with only about a $3.2M gap between the highest and lowest performer (Andrew Fuller, $48.3M). This suggests a fairly even distribution of sales responsibility rather than performance being driven by one or two standout employees.
 
 ### 4. Is revenue trending up or down month over month?
 - Query: `queries/monthly_revenue_trend.sql`
