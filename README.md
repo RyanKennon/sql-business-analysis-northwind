@@ -189,4 +189,10 @@ ORDER BY ShippingDays ASC;
 
 ## Next Steps
 
-With more time, this analysis could be extended by digging deeper into shipping delay patterns rather than just averages (for example, looking at the distribution of shipping times or flagging outlier orders), exploring whether certain product categories or countries are more prone to discounts, or examining how customer spend changes over time rather than just as a lifetime total. This SQL analysis also lays the groundwork for the next project in this portfolio series, an interactive dashboard built on the same dataset.
+With more time, this analysis could be extended by digging deeper into shipping delay patterns rather than just averages (for example, looking at the distribution of shipping times or flagging outlier orders), exploring whether certain product categories or countries are more prone to discounts, or examining how customer spend changes over time rather than just as a lifetime total. This SQL analysis also lays the groundwork for the next project in this portfolio series: the [Northwind Sales Performance Dashboard](https://github.com/RyanKennon/Northwind-Sales-Dashboard/tree/main), an interactive Power BI dashboard built on the same dataset.
+
+---
+
+---
+
+➡️ **Next project:** [Northwind Sales Performance Dashboard](https://github.com/RyanKennon/Northwind-Sales-Dashboard)
